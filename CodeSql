@@ -1,0 +1,72 @@
+# After importing the tables containing my data into SSMS, I needed to perform further data cleaning operations using SQL, similar procedures for both the production table and the consumer price index table: To work on my data without corrupting or losing it, I created temporary numeric columns where I would store the numeric values resulting from subsequent modification operations:
+
+ALTER TABLE dbo.Produzioneindustriale
+ADD Spain_num FLOAT NULL,
+    France_num FLOAT NULL, …
+
+# Next, I performed “TRY_PARSE” operations, which allowed me to obtain cells containing clean, usable values. This step enabled me to convert columns storing values as text strings (specifically “nvarchar”, a variable-length Unicode data type) into columns with numeric values (specifically “float”, a floating-point data type used for decimal numbers); it is here that I set any strings containing non-numeric characters to “NULL” (thereby transforming the strings into data suitable for my calculations); meanwhile, I used “LTRIM” and “RTRIM” to remove whitespace and invisible characters from the cells; and finally, by using the “USING ‘it-IT’” clause, I ensured that SQL interpreted the comma as a decimal separator (analogous to the period used in English-speaking countries):
+
+UPDATE dbo.Produzioneindustriale
+SET Italy_num = TRY_PARSE(NULLIF(LTRIM(RTRIM(Italy)), 'NULL') AS float USING 'it-IT'),
+France_num = TRY_PARSE(NULLIF(LTRIM(RTRIM(France)), 'NULL') AS float USING 'it-IT'), …
+
+# Subsequently, after verifying that all the values in the table were correct, I deleted the original column: 
+
+ALTER TABLE dbo.Produzioneindustriale 
+DROP COLUMN Italy
+
+# To conclude, I renamed the numeric column:
+
+EXEC sp_rename 'dbo.Produzioneindustriale.Italy_num', 'Italy', 'COLUMN';
+
+# Next, I created the table that would serve as the basis for my subsequent work, designed to correlate monthly crude oil price figures (Brent, WTI, Dubai, and the Brent-WTI spread) with industrial production data and the Harmonized Index of Consumer Prices. For this table, I did not include data for every available country; instead, I selected only those that would allow me, at a later stage, to work with a group of nations comparable in terms of their industrial, economic, social, and political characteristics. I chose four European countries: Italy, Germany, France, and Spain. The first step in creating the final table involved converting the daily oil price figures found in the “oil_prices_daily(1)” table into monthly values. To avoid altering the original table, I created a new one named “oil_prices_monthly” and populated it with these new monthly figures:
+
+SELECT 
+    CONCAT(YEAR(TRY_CONVERT(date, YearMonth)), '-', RIGHT('0' + CAST(MONTH(TRY_CONVERT(date, YearMonth)) AS VARCHAR(2)), 2)) AS YearMonth,
+    ROUND(AVG(CAST(brent_usd AS FLOAT)), 3) AS Brent_MonthlyAvg,
+    ROUND(AVG(CAST(wti_usd AS FLOAT)), 3) AS WTI_MonthlyAvg,
+    ROUND(AVG(CAST(dubai_usd AS FLOAT)), 3) AS Dubai_MonthlyAvg,
+    ROUND(AVG(CAST(brent_wti_spread AS FLOAT)), 3) AS BrentWTI_Spread_MonthlyAvg
+FROM [dbo].[oil_prices_daily(1)]
+GROUP BY 
+    YEAR(TRY_CONVERT(date, YearMonth)),
+    MONTH(TRY_CONVERT(date, YearMonth))
+ORDER BY 
+    YEAR(TRY_CONVERT(date, YearMonth)),
+    MONTH(TRY_CONVERT(date, YearMonth));
+
+   CREATE TABLE dbo.oil_prices_monthly (
+    YearMonth CHAR(7) PRIMARY KEY,
+    Brent_MonthlyAvg FLOAT,
+    WTI_MonthlyAvg FLOAT,
+    Dubai_MonthlyAvg FLOAT,
+    BrentWTI_Spread_MonthlyAvg FLOAT
+);
+
+INSERT INTO dbo.oil_prices_monthly (
+    YearMonth,
+    Brent_MonthlyAvg,
+    WTI_MonthlyAvg,
+    Dubai_MonthlyAvg,
+    BrentWTI_Spread_MonthlyAvg)
+
+# After that, I was able to write the code to create the final table:
+SELECT 
+    p.YearMonth,
+    p.Brent_MonthlyAvg,
+    p.WTI_MonthlyAvg,
+    p.Dubai_MonthlyAvg,
+    p.BrentWTI_Spread_MonthlyAvg,
+    h.Spain_Prices,
+    h.Germany_Prices,
+    …
+    pr.Spain_Prod,
+    pr.Germany_Prod,
+    …
+INTO dbo.Prog
+FROM dbo.oil_prices_monthly p
+LEFT JOIN dbo.IndicePrezzialconsumo h
+    ON p.YearMonth = h.YearMonth
+LEFT JOIN dbo.Produzioneindustriale pr
+    ON p.YearMonth = pr.YearMonth
+ORDER BY p.YearMonth;
