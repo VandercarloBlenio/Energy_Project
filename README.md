@@ -70,7 +70,7 @@ Charts:
   
 ---
 
-## Documentation
+## Documentation (for further information)
 
 ### English Version
 
