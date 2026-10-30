@@ -30,10 +30,7 @@ The project aims to:
 
 - Oil and Geopolitics 9K daily obs Brent 35 years (https://www.kaggle.com/datasets/sergionefedov/oil-and-geopolitics-9k-daily-obs-brent-35-years?select=sanctions_timeline.csv). A dataset linking crude oil prices to major geopolitical events.
 
-- Production in industry - monthly data (https://ec.europa.eu/eurostat/databrowser/view/sts_inpr_m__custom_22165069/default/table). Measures changes in production volume on a monthly basis. It covers the following sectors: 
-•	Mining and quarrying 
-•	Manufacturing 
-•	Electricity, gas, steam, and air conditioning supply. 
+- Production in industry - monthly data (https://ec.europa.eu/eurostat/databrowser/view/sts_inpr_m__custom_22165069/default/table). Measures changes in production volume on a monthly basis. It covers the following sectors: mining and quarrying, manufacturing, electricity, gas, steam, and air conditioning supply. 
 This dataset includes data for thirty-seven nations (both within and outside the European Union). The reference period runs from 1990 to May 2026.
 
 - Harmonised Index of Consumer Prices (HICP) – monthly data (https://ec.europa.eu/eurostat/databrowser/view/prc_hicp_minr__custom_22908857/default/table). The Harmonised Index of Consumer Prices (HICP) measures price changes for various consumer goods and services over time. This index is used to measure inflation. This dataset includes data for thirty-seven nations (both within and outside the European Union). The reference period runs from 1996 to August 2026.
