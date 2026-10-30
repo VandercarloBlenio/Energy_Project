@@ -3,6 +3,7 @@
 ## Overview
 
 The objective is to analyze production volumes, the Harmonized Index of Consumer Prices, and the trends of the three key oil market benchmarks (Brent, WTI, and Dubai) for a cluster of Western European-linked nations, while also examining the relationships between these variables. The analysis covers the period from January 2021 to April 2025, a timeframe that encompasses one of the most significant geopolitical events of recent years: the 2022 Russia-Ukraine conflict.
+
 ---
 
 ## Objectives
@@ -11,7 +12,7 @@ The project aims to:
 
 - Analyze Brent, WTI, and Dubai crude oil price trends.
 - Examine inflation using the Harmonised Index of Consumer Prices (HICP) for the four countries under consideration
-- Compare industrial production performance across countries.
+- Compare industrial production performance across countries
 - Explore possible relationships between energy prices, inflation, and industrial output.
 
 ---
@@ -25,26 +26,21 @@ The project aims to:
 
 ---
 
-## Project Workflow
+## Data sources
 
-1. Data collection from Eurostat, Kaggle, and energy sector sources.
-2. Data cleaning and transformation in SQL Server.
-3. Aggregation of daily oil prices into monthly indicators.
-4. Integration of oil market, inflation, and industrial production datasets.
-5. Dashboard creation in Power BI.
-6. Economic interpretation of the results.
+- Oil and Geopolitics 9K daily obs Brent 35 years (https://www.kaggle.com/datasets/sergionefedov/oil-and-geopolitics-9k-daily-obs-brent-35-years?select=sanctions_timeline.csv). A dataset linking crude oil prices to major geopolitical events.
 
----
+- Production in industry - monthly data (https://ec.europa.eu/eurostat/databrowser/view/sts_inpr_m__custom_22165069/default/table). Measures changes in production volume on a monthly basis. It covers the following sectors: 
+•	Mining and quarrying 
+•	Manufacturing 
+•	Electricity, gas, steam, and air conditioning supply. 
+This dataset includes data for thirty-seven nations (both within and outside the European Union). The reference period runs from 1990 to May 2026.
 
-## Key Skills Demonstrated
+- Harmonised Index of Consumer Prices (HICP) – monthly data (https://ec.europa.eu/eurostat/databrowser/view/prc_hicp_minr__custom_22908857/default/table). The Harmonised Index of Consumer Prices (HICP) measures price changes for various consumer goods and services over time. This index is used to measure inflation. This dataset includes data for thirty-seven nations (both within and outside the European Union). The reference period runs from 1996 to August 2026.
 
-- Data Cleaning
-- ETL Processes
-- Data Integration
-- Data Analysis
-- Data Visualization
-- Business Intelligence management
-- Power BI Dashboard Development
+- Data regarding refineries in Europe and worldwide (https://fuelseurope.eu/statistics and https://www.iea.org/reports/oil-2025/executive-summary)
+
+- Energy data: on electricity costs and how energy products are extracted and used (https://ec.europa.eu/eurostat/databrowser/view/nrg_pc_204__custom_22964930/default/table?page=time:2025-S2 and https://ec.europa.eu/eurostat/databrowser/view/NRG_BAL_S__custom_22964841/default/map?lang=en&page=time:2024)4
 
 ---
 
@@ -52,16 +48,26 @@ The project aims to:
 
 The Power BI dashboard explores:
 
-- Oil price evolution (Brent, WTI, Dubai)
 - Inflation trends
 - Industrial production performance
+- Oil price evolution (Brent, WTI, Dubai)
 - Cross-country comparisons
 
 Charts:
-<img width="1125" height="637" alt="Screenshot 2026-10-22 131655" src="https://github.com/user-attachments/assets/b1a2d4c8-e580-4939-a2d8-547fbbb8d0b2" />
-<img width="1122" height="632" alt="Screenshot 2026-10-22 131741" src="https://github.com/user-attachments/assets/397e257d-c52a-49c0-8897-42116dfbed10" />
 
+<img width="1432" height="802" alt="Screenshot 2026-10-30 132245" src="https://github.com/user-attachments/assets/2aff7dc8-17e7-408a-8b9f-31ada67c6037" />
+<img width="1125" height="637" alt="Screenshot 2026-10-22 131655" src="https://github.com/user-attachments/assets/43cc2a98-2fb9-41a6-aba6-e26f20939afd" />
 
+---
+
+## Key Findings
+
+- The rise in inflation did not begin with the outbreak of the war in Russia (although the conflict certainly exacerbated the situation). For all the countries in question, this upward trend was already underway prior to the conflict
+- Although oil prices dropped during certain periods, the same cannot be said for prices in the four countries analyzed, which continued to rise throughout the period under review
+- In light of the outbreak of the conflict in Ukraine and rising inflation across our nations, only Germany and Italy appear to have experienced a particularly negative impact on production
+- Energy Structure May Influence Economic Resilience: countries with different energy mixes appeared to react differently to energy-market shocks
+- During periods of energy or geopolitical shocks, the ability to domestically produce strategic assets and access stable energy sources can help reduce economic vulnerability.
+  
 ---
 
 ## Documentation
@@ -70,15 +76,15 @@ Charts:
 
 📄 [EnergyProject.pdf](https://github.com/user-attachments/files/33817830/EnergyProject.pdf)
 
-
 ### Italian Version
 
 📄 [ProgettoEnergia.pdf](https://github.com/user-attachments/files/33817848/ProgettoEnergia.pdf)
-
 
 ---
 
 ## Author
 
-**Carlo Bellaccini**
+**Carlo Bellaccini** 
+
+Linkedin: www.linkedin.com/in/carlo-bellaccini-a433071b2
 
