@@ -1,10 +1,17 @@
-# After importing the tables containing my data into SSMS, I needed to perform further data cleaning operations using SQL, similar procedures for both the production table and the consumer price index table: To work on my data without corrupting or losing it, I created temporary numeric columns where I would store the numeric values resulting from subsequent modification operations:
+# After importing the tables containing my data into SSMS, I needed to perform further data cleaning operations using SQL, 
+# similar procedures for both the production table and the consumer price index table: To work on my data without corrupting or losing it, 
+# I created temporary numeric columns where I would store the numeric values resulting from subsequent modification operations:
 
 ALTER TABLE dbo.Produzioneindustriale
 ADD Spain_num FLOAT NULL,
     France_num FLOAT NULL, …
 
-# Next, I performed “TRY_PARSE” operations, which allowed me to obtain cells containing clean, usable values. This step enabled me to convert columns storing values as text strings (specifically “nvarchar”, a variable-length Unicode data type) into columns with numeric values (specifically “float”, a floating-point data type used for decimal numbers); it is here that I set any strings containing non-numeric characters to “NULL” (thereby transforming the strings into data suitable for my calculations); meanwhile, I used “LTRIM” and “RTRIM” to remove whitespace and invisible characters from the cells; and finally, by using the “USING ‘it-IT’” clause, I ensured that SQL interpreted the comma as a decimal separator (analogous to the period used in English-speaking countries):
+# Next, I performed “TRY_PARSE” operations, which allowed me to obtain cells containing clean, usable values. 
+# This step enabled me to convert columns storing values as text strings (specifically “nvarchar”, a variable-length Unicode data type) into columns with numeric values
+# (specifically “float”, a floating-point data type used for decimal numbers); 
+# it is here that I set any strings containing non-numeric characters to “NULL” (thereby transforming the strings into data suitable for my calculations);
+# meanwhile, I used “LTRIM” and “RTRIM” to remove whitespace and invisible characters from the cells; and finally, by using the “USING ‘it-IT’” clause, 
+# I ensured that SQL interpreted the comma as a decimal separator (analogous to the period used in English-speaking countries):
 
 UPDATE dbo.Produzioneindustriale
 SET Italy_num = TRY_PARSE(NULLIF(LTRIM(RTRIM(Italy)), 'NULL') AS float USING 'it-IT'),
@@ -19,7 +26,14 @@ DROP COLUMN Italy
 
 EXEC sp_rename 'dbo.Produzioneindustriale.Italy_num', 'Italy', 'COLUMN';
 
-# Next, I created the table that would serve as the basis for my subsequent work, designed to correlate monthly crude oil price figures (Brent, WTI, Dubai, and the Brent-WTI spread) with industrial production data and the Harmonized Index of Consumer Prices. For this table, I did not include data for every available country; instead, I selected only those that would allow me, at a later stage, to work with a group of nations comparable in terms of their industrial, economic, social, and political characteristics. I chose four European countries: Italy, Germany, France, and Spain. The first step in creating the final table involved converting the daily oil price figures found in the “oil_prices_daily(1)” table into monthly values. To avoid altering the original table, I created a new one named “oil_prices_monthly” and populated it with these new monthly figures:
+# Next, I created the table that would serve as the basis for my subsequent work, 
+# designed to correlate monthly crude oil price figures (Brent, WTI, Dubai, and the Brent-WTI spread) 
+# with industrial production data and the Harmonized Index of Consumer Prices. 
+# For this table, I did not include data for every available country; instead, 
+# I selected only those that would allow me, at a later stage, to work with a group of nations comparable in terms of 
+# their industrial, economic, social, and political characteristics. I chose four European countries: Italy, Germany, France, and Spain. 
+# The first step in creating the final table involved converting the daily oil price figures found in the “oil_prices_daily(1)” table into monthly values. 
+# To avoid altering the original table, I created a new one named “oil_prices_monthly” and populated it with these new monthly figures:
 
 SELECT 
     CONCAT(YEAR(TRY_CONVERT(date, YearMonth)), '-', RIGHT('0' + CAST(MONTH(TRY_CONVERT(date, YearMonth)) AS VARCHAR(2)), 2)) AS YearMonth,
