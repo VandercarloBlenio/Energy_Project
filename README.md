@@ -57,7 +57,7 @@ Charts:
 
 <img width="1125" height="637" alt="Screenshot 2026-10-22 131655" src="https://github.com/user-attachments/assets/c3a5550d-47f0-42db-a766-1b7e94ae9ed0" />
 <img width="1122" height="632" alt="Screenshot 2026-10-22 131741" src="https://github.com/user-attachments/assets/19742418-fe08-470e-bdd8-ba43cac6a871" />
-<img width="1432" height="802" alt="Screenshot 2026-10-30 132245" src="https://github.com/user-attachments/assets/c93cfae1-18d1-4c46-bb2c-64ad1e357602" />
+<img width="1431" height="798" alt="Screenshot 2026-10-30 153315" src="https://github.com/user-attachments/assets/b2a788ec-649b-4db7-8016-07089b48256c" />
 <img width="1431" height="800" alt="Screenshot 2026-10-30 132314" src="https://github.com/user-attachments/assets/d38750f1-1778-45cf-8fa1-e4a23ff5f26f" />
 <img width="1430" height="797" alt="Screenshot 2026-10-30 132548" src="https://github.com/user-attachments/assets/c36014e5-7e7f-4ba0-a85a-84f14fba165b" />
 
