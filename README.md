@@ -2,7 +2,7 @@
 
 ## Overview
 
-The objective is to analyze production volumes, the Harmonized Index of Consumer Prices, and the trends of the three key oil market benchmarks (Brent, WTI, and Dubai) for a cluster of Western European-linked nations, while also examining the relationships between these variables. The analysis covers the period from January 2021 to April 2025, a timeframe that encompasses one of the most significant geopolitical events of recent years: the 2022 Russia-Ukraine conflict.
+This study investigates the relationships between production volumes, the Harmonised Index of Consumer Prices (HICP), and the three principal oil price benchmarks (Brent, WTI, and Dubai) across a cluster of Western European countries, while exploring the underlying causes of the observed dynamics. The analysis covers the period from January 2021 to April 2025, a timeframe that encompasses one of the most significant geopolitical events of recent years: the 2022 Russia-Ukraine conflict.
 
 ---
 
